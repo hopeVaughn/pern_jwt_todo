@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import './App.css';
 //components
 import { Dashboard } from "./components/dashboard";
-import { Login, Register } from "./components";
+import { Login, Register, Landing } from "./components";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -35,6 +35,8 @@ function App() {
     <Router>
       <div className="container">
         <Routes>
+          <Route exact path="/" element={
+            !isAuthenticated ? (<Landing />) : (<Navigate to="/dashboard" />)} />
           <Route exact path="/login" element={
             !isAuthenticated ? (<Login setAuth={setAuth} />) : (<Navigate to="/dashboard" />)} />
           <Route exact path="/register" element={

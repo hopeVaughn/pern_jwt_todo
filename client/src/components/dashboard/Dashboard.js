@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "../../App.css";
+
+//components
+import InputTodo from "./todolist/InputTodo";
+import ListTodos from "./todolist/ListTodo";
+
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
+  const [allTodos, setAllTodos] = useState([]);
+  const [todosChange, setTodosChange] = useState(false);
 
   const getProfile = async () => {
     try {
@@ -12,7 +19,8 @@ const Dashboard = ({ setAuth }) => {
       });
 
       const parseData = await res.json();
-      setName(parseData.user_name);
+      setAllTodos(parseData);
+      setName(parseData[0].user_name);
     } catch (err) {
       console.error(err.message);
     }
@@ -31,15 +39,19 @@ const Dashboard = ({ setAuth }) => {
 
   useEffect(() => {
     getProfile();
-  }, []);
+    setTodosChange(false)
+  }, [todosChange]);
 
   return (
     <div>
-      <h1 className="mt-5">Dashboard</h1>
-      <h2>Welcome {name}</h2>
-      <button onClick={e => logout(e)} className="btn btn-primary">
-        Logout
-      </button>
+      <div className="d-flex mt-5 justify-content-around">
+        <h2>{name}'s Todo list</h2>
+        <button onClick={e => logout(e)} className="btn btn-primary">
+          Logout
+        </button>
+      </div>
+      <InputTodo setTodosChange={setTodosChange} />
+      <ListTodos allTodos={allTodos} />
     </div>
   );
 };
