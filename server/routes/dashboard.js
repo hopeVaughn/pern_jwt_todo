@@ -58,5 +58,22 @@ router.put("/todos/:id", authorize, async (req, res) => {
   }
 });
 // delete a todo
+router.delete("/todos/:id", authorize, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteTodo = await pool.query(
+      "DELETE FROM todos WHERE todo_id = $1 AND user_id = $2 RETURNING *",
+      [id, req.user.id]
+    );
+
+    if (deleteTodo.rows.length === 0) {
+      return res.json("This Todo is not yours");
+    }
+
+    res.json("Todo was deleted");
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 module.exports = router;
