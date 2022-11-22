@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css';
 //components
-import { Dashboard, Login, Register } from "./components";
+import { Dashboard } from "./components/dashboard";
+import { Login, Register } from "./components";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
