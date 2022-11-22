@@ -17,10 +17,7 @@ const EditTodo = ({ todo, setTodosChange }) => {
         headers: myHeaders,
         body: JSON.stringify(body)
       });
-
       setTodosChange(true);
-
-      // window.location = "/";
     } catch (err) {
       console.error(err.message);
     }

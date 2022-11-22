@@ -2,11 +2,9 @@ import React, { Fragment, useState, useEffect } from "react";
 import EditTodo from "./EditTodo";
 
 const ListTodos = ({ allTodos, setTodosChange }) => {
-  // console.log(allTodos);
   const [todos, setTodos] = useState([]); //empty array
 
   //delete todo function
-
   async function deleteTodo(id) {
     try {
       await fetch(`http://localhost:5000/dashboard/todos/${id}`, {
@@ -20,19 +18,9 @@ const ListTodos = ({ allTodos, setTodosChange }) => {
     }
   }
 
-  // async function getTodos() {
-  //   const res = await fetch("http://localhost:5000/todos");
-
-  //   const todoArray = await res.json();
-
-  //   setTodos(todoArray);
-  // }
-
   useEffect(() => {
     setTodos(allTodos);
   }, [allTodos]);
-
-  console.log(todos);
 
   return (
     <Fragment>
