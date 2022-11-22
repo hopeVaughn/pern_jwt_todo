@@ -6,7 +6,6 @@ import { Dashboard } from "./components/dashboard";
 import { Login, Register, Landing } from "./components";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const checkAuthenticated = async () => {
     try {
@@ -27,6 +26,7 @@ function App() {
     checkAuthenticated();
   }, []);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const setAuth = boolean => {
     setIsAuthenticated(boolean);
